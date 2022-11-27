@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code."
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "Since this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "SP_blog",
+    "section": "",
+    "text": "news\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 27, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njupyter\n\n\ntest\n\n\n\n\n\n\n\n\n\n\n\nNov 27, 2022\n\n\ncbarz\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 24, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "posts/jupyter/index.html",
+    "href": "posts/jupyter/index.html",
+    "title": "jupyter test",
+    "section": "",
+    "text": "import pyomo.environ as pyo\n\n\nmodel = pyo.ConcreteModel()\n\nmodel.x = pyo.Var([1,2], domain=pyo.NonNegativeReals)\n\nmodel.OBJ = pyo.Objective(expr = 2*model.x[1] + 3*model.x[2])\n\nmodel.Constraint1 = pyo.Constraint(expr = 3*model.x[1] + 4*model.x[2] >= 1)\n\n\nsolver = pyo.SolverFactory('glpk')\n\n\nsolver.solve(model)\n\n{'Problem': [{'Name': 'unknown', 'Lower bound': 0.666666666666667, 'Upper bound': 0.666666666666667, 'Number of objectives': 1, 'Number of constraints': 2, 'Number of variables': 3, 'Number of nonzeros': 3, 'Sense': 'minimize'}], 'Solver': [{'Status': 'ok', 'Termination condition': 'optimal', 'Statistics': {'Branch and bound': {'Number of bounded subproblems': 0, 'Number of created subproblems': 0}}, 'Error rc': 0, 'Time': 0.01656818389892578}], 'Solution': [OrderedDict([('number of solutions', 0), ('number of solutions displayed', 0)])]}\n\n\n\nmodel.pprint()\n\n1 Set Declarations\n    x_index : Size=1, Index=None, Ordered=Insertion\n        Key  : Dimen : Domain : Size : Members\n        None :     1 :    Any :    2 : {1, 2}\n\n1 Var Declarations\n    x : Size=2, Index=x_index\n        Key : Lower : Value             : Upper : Fixed : Stale : Domain\n          1 :     0 : 0.333333333333333 :  None : False : False : NonNegativeReals\n          2 :     0 :               0.0 :  None : False : False : NonNegativeReals\n\n1 Objective Declarations\n    OBJ : Size=1, Index=None, Active=True\n        Key  : Active : Sense    : Expression\n        None :   True : minimize : 2*x[1] + 3*x[2]\n\n1 Constraint Declarations\n    Constraint1 : Size=1, Index=None, Active=True\n        Key  : Lower : Body            : Upper : Active\n        None :   1.0 : 3*x[1] + 4*x[2] :  +Inf :   True\n\n4 Declarations: x_index x OBJ Constraint1"
+  }
+]

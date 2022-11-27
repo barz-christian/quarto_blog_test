@@ -1,0 +1,45 @@
+---
+author: cbarz
+date: 04.10.2022
+description: build a blog with quarto and nbdev
+tags: [technical]
+title: building blog
+---
+
+## blog building
+
+1. Hamel Husain and Jeremy Howard did a great 
+job with nbdev 2
+1. often their post start with migration from nbdev 1 or other topics
+1. to shorten the reading of their posts I am sumarizing their post for myself here
+1. there will be some gaps we have to fill which I did not saw while reading or were not mentioned by Hamel Husain and Jeremy Howard
+
+## history
+
+1. setup (nbdev project)
+    - install quarto (one time)
+    - create conda env + poetry
+    - create empty repo and clone it
+    - poetry init
+    - poetry add nbdev notebook 
+    - nbdev_new
+    - commit and push to test CI/CD workflows
+    - set up github pages
+    - nbdev_install_hooks
+    - nbdev_export
+    - pip install -e '.[dev]'
+1. add dependencies to github workflow 
+1. unrelevant from nbdev bloging tutorial
+    - ```
+      quarto create-project --type website:blog .
+      quarto install extension quarto-ext/video
+      ```
+1. relevant from nbdev bloging tutorial
+    - create blog directory in the nbs folder
+    - create index.qmd file
+    - edit _quarto.yml
+    - `quarto publish` : 
+        - If using GitHub Pages, commit your files to GitHub before publish your site.
+         No GitHub Actions are needed, you can use quarto publish instead. 
+         If you want to automate your workflow with GitHub Actions, you can follow 
+         [these instructions](https://quarto.org/docs/publishing/quarto-pub.html#github-action).

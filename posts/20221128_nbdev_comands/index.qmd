@@ -1,0 +1,44 @@
+---
+author: cbarz
+date: 28.11.2022
+description: list of nbdev commands
+tags: [technical, nbdev]
+title: useful nbdev comands
+---
+
+## introduction
+
+(please no offence - this list is only used for personal usage and text was written quickly to have a start)
+
+1. Hamel Husain and Jeremy Howard did a great 
+job with nbdev 2
+1. however looking up relevant comands is time consuming as they are scattered in the text at the moment.
+1. I am just collecting comands with short explanaition, which are in my opinion relevant for bloging with nbdev2 
+1. droping what is unrelavant imho
+
+# console commands
+
+- nbdev_prepare - bundles "everything"
+
+- nbdev_export - builds .py modules
+- nbdev_test - tests nbs
+- nbdev_clean - cleans nbs
+
+## less relevant
+
+- nbdev_preview
+
+# notebook comands
+
+- #| default_exp [module name]
+- #|export
+- 
+
+# must have
+
+set last cell of notebooks which define modules to, in order to export them
+
+```
+#| hide
+import nbdev; nbdev.nbdev_export()
+```

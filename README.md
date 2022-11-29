@@ -1,3 +1,5 @@
+status:WIP
+
 # SP_blog
 
 This will become a personal blog dealing mainly with topic about mathematical optimization.
@@ -7,9 +9,10 @@ As the documentation for these three tools is exhaustive, the corresponding blog
 
 
 
-## local setup
+# local setup
 
-I use conda for environment management and poetry for package management.
+Here I use conda for environment management and poetry for package management.
+Here I use jupyter lab as UI.
 
 ```
 conda env create -f --name [your enviroment names] environment.yml

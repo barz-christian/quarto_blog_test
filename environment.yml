@@ -1,4 +1,4 @@
-name: quarto_blog
+name: SP_blog
 channels:
   - conda-forge
   - defaults

@@ -56,17 +56,108 @@
     "text": "history\n\nsetup (nbdev project)\n\ninstall quarto (one time)\ncreate conda env + poetry\ncreate empty repo and clone it\npoetry init\npoetry add nbdev notebook\nnbdev_new\ncommit and push to test CI/CD workflows\nset up github pages\nnbdev_install_hooks\nnbdev_export\npip install -e ‘.[dev]’\n\nadd dependencies to github workflow\nunrelevant from nbdev bloging tutorial\n\n   quarto create-project --type website:blog .\n   quarto install extension quarto-ext/video\n\nrelevant from nbdev bloging tutorial\n\ncreate blog directory in the nbs folder\ncreate index.qmd file\nedit _quarto.yml\nquarto publish :\n\nIf using GitHub Pages, commit your files to GitHub before publish your site. No GitHub Actions are needed, you can use quarto publish instead. If you want to automate your workflow with GitHub Actions, you can follow these instructions."
   },
   {
+    "objectID": "posts/20220929_citation/index.html",
+    "href": "posts/20220929_citation/index.html",
+    "title": "Citation and Footnotes in quarto",
+    "section": "",
+    "text": "markdown footnote syntax (as I have to look this up regularly)\nexplain initial setup including a test\nexplain steps to generate citations and a bibliography with quarto"
+  },
+  {
+    "objectID": "posts/20220929_citation/index.html#bibliography-generation",
+    "href": "posts/20220929_citation/index.html#bibliography-generation",
+    "title": "Citation and Footnotes in quarto",
+    "section": "4.1 Bibliography Generation",
+    "text": "4.1 Bibliography Generation\nSupose you want to add a new reference to your citation database references.bib, e.g. (Trotta et al. 2022). I usually do the following:\n\nopen google scholar\nsearch for your reference, e.g. “trotta routing on a ring”\nuse the nice link “citation” below the hit of google scholar and choose BibTex next\nsimply copy and paste the content to your references.bib file. The copied content will look like:\n\n@article{trotta2022pickup,\n  title={Pickup and delivery problems with autonomous vehicles on rings},\n  author={Trotta, Manuel and Archetti, Claudia and Feillet, Dominique and Quilliot, Alain},\n  journal={European Journal of Operational Research},\n  volume={300},\n  number={1},\n  pages={221--236},\n  year={2022},\n  publisher={Elsevier}\n}"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "SP_blog",
     "section": "",
-    "text": "jupyter\n\n\ntest\n\n\n\n\n\n\n\n\n\n\n\nNov 27, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 24, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\nuse github actions\n\n\n\n\n\n\nSep 28, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\nlist of nbdev commands\n\n\n\n\n\n\nInvalid Date\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njupyter\n\n\ntest\n\n\n\n\n\n\n\n\n\n\n\nSep 27, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\nbuild a blog with quarto and nbdev\n\n\n\n\n\n\nApr 10, 2022\n\n\ncbarz\n\n\n\n\n\n\nNo matching items"
+    "text": "quarto\n\n\n\n\n\n\n\n\n\n\n\nNov 29, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njupyter\n\n\ntest\n\n\n\n\n\n\n\n\n\n\n\nNov 27, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 24, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\nuse github actions\n\n\n\n\n\n\nSep 28, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\nlist of nbdev commands\n\n\n\n\n\n\nInvalid Date\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njupyter\n\n\ntest\n\n\n\n\n\n\n\n\n\n\n\nSep 27, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\nbuild a blog with quarto and nbdev\n\n\n\n\n\n\nApr 10, 2022\n\n\ncbarz\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this blog"
+    "text": "At the moment its mainly about how to build a blog with nbdev and quarto and publish it on github. As the documentation for these three tools is exhaustive, the corresponding blog post aggregate what was relevant for myself."
+  },
+  {
+    "objectID": "posts/20220929_citation/index.html#steps-in-a-blog-document",
+    "href": "posts/20220929_citation/index.html#steps-in-a-blog-document",
+    "title": "Citation and Footnotes in quarto",
+    "section": "3.2 steps in a blog document",
+    "text": "3.2 steps in a blog document\nMarkdown format for citation\n[@citation]\nsources: - https://quarto.org/docs/authoring/footnotes-and-citations.html"
+  },
+  {
+    "objectID": "posts/20220929_citation/index.html#add-a-citation-in-a-blog-document",
+    "href": "posts/20220929_citation/index.html#add-a-citation-in-a-blog-document",
+    "title": "Citation and Footnotes in quarto",
+    "section": "4.2 Add a citation in a blog document",
+    "text": "4.2 Add a citation in a blog document\n\nMarkdown format for citation is [@citation]\nGiven example: [@trotta2022pickup] renders to (Trotta et al. 2022)\nThere are other markdown format for citation, e.g. @trotta2022pickup renders to Trotta et al. (2022). For more information just have a look at the sources below."
+  },
+  {
+    "objectID": "posts/20220929_citation/index.html#input",
+    "href": "posts/20220929_citation/index.html#input",
+    "title": "Citation and Footnotes in quarto",
+    "section": "2.1 input",
+    "text": "2.1 input\nHere is a footnote reference,[^1] and another.[^longnote]\n\n[^1]: Here is the footnote.\n[^longnote]: Here's one with multiple blocks.\n\n    Subsequent paragraphs are indented to show that they\nbelong to the previous footnote.\n\n        { some.code }\n\n    The whole paragraph can be indented, or just the first\n    line.  In this way, multi-paragraph footnotes work like\n    multi-paragraph list items.\n\nThis paragraph won't be part of the note, because it\nisn't indented."
+  },
+  {
+    "objectID": "posts/20220929_citation/index.html#output",
+    "href": "posts/20220929_citation/index.html#output",
+    "title": "Citation and Footnotes in quarto",
+    "section": "2.2 output",
+    "text": "2.2 output\nHere is a footnote reference,1 and another.2\nThis paragraph won’t be part of the note, because it isn’t indented."
+  },
+  {
+    "objectID": "posts/20220929_citation/index.html#inline-footnote",
+    "href": "posts/20220929_citation/index.html#inline-footnote",
+    "title": "Citation and Footnotes in quarto",
+    "section": "2.3 inline footnote",
+    "text": "2.3 inline footnote\nHere is an inline note.^[Inlines notes are easier to write,\nsince you don't have to pick an identifier and move down to\ntype the note.]\nHere is an inline note.3"
+  },
+  {
+    "objectID": "posts/20221129_citation/index.html",
+    "href": "posts/20221129_citation/index.html",
+    "title": "Citation and Footnotes in quarto",
+    "section": "",
+    "text": "footnotes: - markdown footnote syntax (as I have to look this up regularly) citations: - explain initial setup including a test - explain steps to generate citations and a bibliography with quarto"
+  },
+  {
+    "objectID": "posts/20221129_citation/index.html#input",
+    "href": "posts/20221129_citation/index.html#input",
+    "title": "Citation and Footnotes in quarto",
+    "section": "3.1 input",
+    "text": "3.1 input\nHere is a footnote reference,[^1] and another.[^longnote]\n\n[^1]: Here is the footnote.\n[^longnote]: Here's one with multiple blocks.\n\n    Subsequent paragraphs are indented to show that they\nbelong to the previous footnote.\n\n        { some.code }\n\n    The whole paragraph can be indented, or just the first\n    line.  In this way, multi-paragraph footnotes work like\n    multi-paragraph list items.\n\nThis paragraph won't be part of the note, because it\nisn't indented."
+  },
+  {
+    "objectID": "posts/20221129_citation/index.html#output",
+    "href": "posts/20221129_citation/index.html#output",
+    "title": "Citation and Footnotes in quarto",
+    "section": "3.2 output",
+    "text": "3.2 output\nHere is a footnote reference,1 and another.2\nThis paragraph won’t be part of the note, because it isn’t indented."
+  },
+  {
+    "objectID": "posts/20221129_citation/index.html#inline-footnote",
+    "href": "posts/20221129_citation/index.html#inline-footnote",
+    "title": "Citation and Footnotes in quarto",
+    "section": "3.3 inline footnote",
+    "text": "3.3 inline footnote\nHere is an inline note.^[Inlines notes are easier to write,\nsince you don't have to pick an identifier and move down to\ntype the note.]\nHere is an inline note.3"
+  },
+  {
+    "objectID": "posts/20221129_citation/index.html#bibliography-generation",
+    "href": "posts/20221129_citation/index.html#bibliography-generation",
+    "title": "Citation and Footnotes in quarto",
+    "section": "5.1 Bibliography Generation",
+    "text": "5.1 Bibliography Generation\nSupose you want to add a new reference to your citation database references.bib, e.g. (Trotta et al. 2022). I usually do the following:\n\nopen google scholar\nsearch for your reference, e.g. “trotta routing on a ring”\nuse the nice link “citation” below the hit of google scholar and choose BibTex next\nsimply copy and paste the content to your references.bib file. The copied content will look like:\n\n@article{trotta2022pickup,\n  title={Pickup and delivery problems with autonomous vehicles on rings},\n  author={Trotta, Manuel and Archetti, Claudia and Feillet, Dominique and Quilliot, Alain},\n  journal={European Journal of Operational Research},\n  volume={300},\n  number={1},\n  pages={221--236},\n  year={2022},\n  publisher={Elsevier}\n}"
+  },
+  {
+    "objectID": "posts/20221129_citation/index.html#add-a-citation-in-a-blog-document",
+    "href": "posts/20221129_citation/index.html#add-a-citation-in-a-blog-document",
+    "title": "Citation and Footnotes in quarto",
+    "section": "5.2 Add a citation in a blog document",
+    "text": "5.2 Add a citation in a blog document\n\nMarkdown format for citation is [@citation]\nGiven example: [@trotta2022pickup] renders to (Trotta et al. 2022)\nThere are other markdown format for citation, e.g. @trotta2022pickup renders to Trotta et al. (2022). For more information just have a look at the sources below."
   }
 ]

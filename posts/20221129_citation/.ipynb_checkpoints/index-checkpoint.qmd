@@ -1,0 +1,141 @@
+---
+title: "Citation and Footnotes in quarto"
+author: "cbarz"
+date: "2022-11-29"
+categories: [quarto]
+number-sections: true
+format:
+  html:
+    code-fold: true
+    code-copy: true
+---
+
+# content
+
+footnotes:
+- markdown footnote syntax (as I have to look this up regularly)
+citations:
+- explain initial setup including a test
+- explain steps to generate citations and a bibliography with quarto
+
+# to do
+
+- code cells are not rendered fine
+- [make copy code work](https://quarto.org/docs/output-formats/html-code.html#copy-button)
+- folding code
+
+# Footnotes
+
+## input
+
+````
+Here is a footnote reference,[^1] and another.[^longnote]
+
+[^1]: Here is the footnote.
+[^longnote]: Here's one with multiple blocks.
+
+    Subsequent paragraphs are indented to show that they
+belong to the previous footnote.
+
+        { some.code }
+
+    The whole paragraph can be indented, or just the first
+    line.  In this way, multi-paragraph footnotes work like
+    multi-paragraph list items.
+
+This paragraph won't be part of the note, because it
+isn't indented.
+````
+
+## output
+
+Here is a footnote reference,[^1] and another.[^longnote]
+
+[^1]: Here is the footnote.
+
+[^longnote]: Here's one with multiple blocks.
+
+    Subsequent paragraphs are indented to show that they
+belong to the previous footnote.
+
+        { some.code }
+
+    The whole paragraph can be indented, or just the first
+    line.  In this way, multi-paragraph footnotes work like
+    multi-paragraph list items.
+
+This paragraph won't be part of the note, because it
+isn't indented.
+
+## inline footnote
+
+````
+Here is an inline note.^[Inlines notes are easier to write,
+since you don't have to pick an identifier and move down to
+type the note.]
+````
+
+Here is an inline note.^[Inlines notes are easier to write,
+since you don't have to pick an identifier and move down to
+type the note.]
+
+# initial setup citation
+
+**Remark:** In the following setup the bibliography is maintained in a `references.bib` file and there is no need to add `bibliography: references.bib` to the YAML medadata field of the document.
+
+1. add `bibliography: references.bib``to `_quarto.yml`
+1. add to root directory of the repository a `references.bib` file with content
+````
+---
+title: References
+---
+
+::: {#refs}
+:::
+````
+1. add to root directory of the repository a `references.bib` file and add (or any 
+````
+@article{knuth84,
+  author = {Knuth, Donald E.},
+  title = {Literate Programming},
+  year = {1984},
+  journal = {Comput. J.},
+  pages = {97–111}
+}
+````
+
+1. test by simply put `@knuth84` in a blog document and call `quarto preview` for example from a conda prompt.
+
+**remark:** Here knuth84 is the unique identifier in the citation database `references.bib`
+
+# workflow
+
+## Bibliography Generation
+
+Supose you want to add a new reference to your citation database `references.bib`, e.g. [@trotta2022pickup]. I usually do the following:
+
+a. open google scholar
+a. search for your reference, e.g. "trotta routing on a ring"
+a. use the nice link "citation" below the hit of google scholar and choose `BibTex` next
+a. simply copy and paste the content to your `references.bib` file. The copied content will look like:
+````
+@article{trotta2022pickup,
+  title={Pickup and delivery problems with autonomous vehicles on rings},
+  author={Trotta, Manuel and Archetti, Claudia and Feillet, Dominique and Quilliot, Alain},
+  journal={European Journal of Operational Research},
+  volume={300},
+  number={1},
+  pages={221--236},
+  year={2022},
+  publisher={Elsevier}
+}
+````
+
+## Add a citation in a blog document
+
+- Markdown format for citation is `[@citation]`
+- Given example: `[@trotta2022pickup]` renders to [@trotta2022pickup]
+- There are other markdown format for citation, e.g. `@trotta2022pickup` renders to @trotta2022pickup. For more information just have a look at the sources below.
+
+# sources 
+- https://quarto.org/docs/authoring/footnotes-and-citations.html

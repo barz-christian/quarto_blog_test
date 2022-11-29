@@ -13,16 +13,19 @@ format:
 # content
 
 footnotes:
+
 - markdown footnote syntax (as I have to look this up regularly)
+
 citations:
+
 - explain initial setup including a test
 - explain steps to generate citations and a bibliography with quarto
 
-# to do
+# to dos
 
-- code cells are not rendered fine
-- [make copy code work](https://quarto.org/docs/output-formats/html-code.html#copy-button)
-- folding code
+- [ ] code cells are not rendered fine
+- [ ] [make copy code work](https://quarto.org/docs/output-formats/html-code.html#copy-button)
+- [ ] folding code
 
 # Footnotes
 
@@ -46,6 +49,8 @@ belong to the previous footnote.
 This paragraph won't be part of the note, because it
 isn't indented.
 ````
+
+**Remark:** The content of the footnote, e.g. ```[^1]: Here is the footnote.``` can be placed anywhere in the document. I usually put it at the end of the document, because some footnotes are used more than once.
 
 ## output
 

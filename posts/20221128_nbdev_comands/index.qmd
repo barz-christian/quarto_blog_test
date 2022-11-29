@@ -3,7 +3,7 @@ title: useful nbdev comands
 author: cbarz
 date: 28.11.2022
 description: list of nbdev commands
-tags: [nbdev]
+categories: [nbdev]
 ---
 
 ## introduction

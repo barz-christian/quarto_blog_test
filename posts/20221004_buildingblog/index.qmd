@@ -3,7 +3,7 @@ title: building blog
 author: cbarz
 date: 04.10.2022
 description: build a blog with quarto and nbdev
-tags: [nbdev,quarto]
+categories: [nbdev,quarto]
 ---
 
 ## blog building

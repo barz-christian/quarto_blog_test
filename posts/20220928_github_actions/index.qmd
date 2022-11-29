@@ -3,7 +3,7 @@ title: github actions
 author: cbarz
 date: 2022-09-28
 description: use github actions
-tags: [github]
+categories: [github]
 ---
 
 # github actions

@@ -102,7 +102,21 @@
     "href": "index.html",
     "title": "SP_blog",
     "section": "",
-    "text": "quarto\n\n\n\n\n\n\n\n\n\n\n\nNov 29, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntest\n\n\n\n\na test to blog a jupyter notebook with a pyomo model\n\n\n\n\n\n\nNov 27, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 24, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ngithub\n\n\n\n\nuse github actions\n\n\n\n\n\n\nSep 28, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnbdev\n\n\n\n\nlist of nbdev commands\n\n\n\n\n\n\nInvalid Date\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\npyomo\n\n\nmodeling\n\n\n\n\n\n\n\n\n\n\n\nSep 27, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnbdev\n\n\nquarto\n\n\n\n\nbuild a blog with quarto and nbdev\n\n\n\n\n\n\nApr 10, 2022\n\n\ncbarz\n\n\n\n\n\n\nNo matching items"
+    "text": "quarto\n\n\n\n\n\n\n\n\n\n\n\nNov 29, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnbdev\n\n\n\n\nlist of nbdev commands\n\n\n\n\n\n\nNov 28, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntest\n\n\n\n\na test to blog a jupyter notebook with a pyomo model\n\n\n\n\n\n\nNov 27, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 24, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ngithub\n\n\n\n\nuse github actions\n\n\n\n\n\n\nSep 28, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\npyomo\n\n\nmodeling\n\n\n\n\n\n\n\n\n\n\n\nSep 27, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnbdev\n\n\nquarto\n\n\n\n\nbuild a blog with quarto and nbdev\n\n\n\n\n\n\nApr 10, 2022\n\n\ncbarz\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "nbs/index.html",
+    "href": "nbs/index.html",
+    "title": "SP_blog",
+    "section": "",
+    "text": "SP_blog\nThis will become a personal blog dealing mainly with topic about mathematical optimization.\nAt the moment its mainly about how to build a blog with nbdev and quarto and publish it on github. As the documentation for these three tools is exhaustive, the corresponding blog post aggregate what was relevant for myself.\n\n\nlocal setup\nHere I use conda for environment management and poetry for package management. Here I use jupyter lab as UI.\nconda env create -f --name [your enviroment names] environment.yml\nconda activate [your enviroment names]\npoetry install"
+  },
+  {
+    "objectID": "nbs/00_core.html",
+    "href": "nbs/00_core.html",
+    "title": "SP_blog",
+    "section": "",
+    "text": "Fill in a module description here\n\n::: {.cell 0=‘h’ 1=‘i’ 2=‘d’ 3=‘e’}\nfrom nbdev.showdoc import *\n:::\n::: {.cell 0=‘e’ 1=‘x’ 2=‘p’ 3=‘o’ 4=‘r’ 5=‘t’}\ndef foo(): pass\n:::\n::: {.cell 0=‘h’ 1=‘i’ 2=‘d’ 3=‘e’}\nimport nbdev; nbdev.nbdev_export()\n:::"
   },
   {
     "objectID": "about.html",

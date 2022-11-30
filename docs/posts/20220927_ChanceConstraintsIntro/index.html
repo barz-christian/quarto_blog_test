@@ -8,6 +8,7 @@
 
 <meta name="author" content="cbarz">
 <meta name="dcterms.date" content="2022-09-27">
+<meta name="description" content="In a stochastic program we can put uncertainty on the constraints. We give a short introduction about the different types of chance constraints and implement some examples in pyomo.">
 
 <title>SP_blog - Change constraints with examples in pyomo</title>
 <style>
@@ -169,7 +170,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Change constraints with examples in pyomo</h1>
-                                <div class="quarto-categories">
+                  <div>
+        <div class="description">
+          In a stochastic program we can put uncertainty on the constraints. We give a short introduction about the different types of chance constraints and implement some examples in pyomo.
+        </div>
+      </div>
+                          <div class="quarto-categories">
                 <div class="quarto-category">pyomo</div>
                 <div class="quarto-category">modeling</div>
               </div>
@@ -208,15 +214,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="change-constraints" class="level1">
 <h1>Change Constraints</h1>
-<p>In a stochastic program we can put uncertainity also on the constraints. This is called change constraints. we will look at the following types of change constraints:</p>
+<p>In a stochastic program with chance constraints we make an optimal decision prior to the realization of random data while allowing constraints to be violated with a probability specified by us. Chance constraints are also called probabilistic constraints.</p>
+<p>In this post we will give the general mathematical description for stochastic programs with chance constraints and explain the following types of change constraints in detail and give example implementations in pyomo:</p>
 <ul>
 <li>single chance</li>
 <li>joint chance constraints</li>
 <li>individual chance constraints</li>
 </ul>
 <section id="mathematical-expression" class="level2">
-<h2 class="anchored" data-anchor-id="mathematical-expression">mathematical expression</h2>
-<p>Mathematically we can express this as follows:</p>
+<h2 class="anchored" data-anchor-id="mathematical-expression">Mathematical expression</h2>
+<p>Mathematically a stochastc program with chance constraints is expressed as follows:</p>
 <p><span class="math display">\[
 \begin{array}{cc}
 \min_x &amp; c\cdot x \\
@@ -224,11 +231,12 @@ s.t.   &amp; P(Ax\leq b) \geq p\\
        &amp; x\geq 0
 \end{array}
 \]</span></p>
-<p>Here the symbols are denoting the following - <span class="math inline">\(x\in\mathbb{R}^n\)</span> the decision variable, - <span class="math inline">\(c\in\mathbb{R}^n\)</span> the coefficients in the objective function, - <span class="math inline">\(A\in\mathbb{R}^{m\times n}\)</span> coefficient of the constraints, - <span class="math inline">\(b\in\mathbb{R}^m\)</span> the right hand side of the constraints and - <span class="math inline">\(p\in(0,1]\)</span> is the probability that the constraints (or some of them) may be violated.</p>
+<p>where the symbols are denoting: - <span class="math inline">\(x\in\mathbb{R}^n\)</span> the decision variable, - <span class="math inline">\(c\in\mathbb{R}^n\)</span> the coefficients in the objective function, - <span class="math inline">\(A\in\mathbb{R}^{m\times n}\)</span> coefficient of the constraints, - <span class="math inline">\(b\in\mathbb{R}^m\)</span> the right hand side of the constraints and - <span class="math inline">\(p\in(0,1]\)</span> is the probability that the constraints (or some of them) may be violated.</p>
 </section>
-<section id="mathemathical-solution" class="level2">
-<h2 class="anchored" data-anchor-id="mathemathical-solution">mathemathical solution</h2>
-<p>we can convert a stochastic program with change constraints into a mixed-integer problem as follows: Let <span class="math inline">\(S\)</span> denote the set of scenarios and <span class="math inline">\(y_k\)</span> binary variables for each <span class="math inline">\(k\in S\)</span>, i.e.&nbsp;<span class="math inline">\(y_k\)</span> equals 1 if and only if the constraint is satisfied in the corresponding scenario, then a scenario-based formulation of the above chance constrained stochastic program is given by:</p>
+<section id="mathemathical-solution---big-m-method" class="level2">
+<h2 class="anchored" data-anchor-id="mathemathical-solution---big-m-method">Mathemathical solution - Big M method</h2>
+<p>To solve a stochastic program with change constraints we can convert it into a mixed-integer problem as follows:</p>
+<p>Let <span class="math inline">\(S\)</span> denote the set of scenarios and let <span class="math inline">\(y_k\)</span> be a binary variable for each <span class="math inline">\(k\in S\)</span>, i.e.&nbsp;<span class="math inline">\(y_k\)</span> equals 1 if and only if the constraint is satisfied in the corresponding scenario, then a scenario-based formulation of the above chance constrained stochastic program is given by:</p>
 <p><span class="math display">\[
 \begin{array}{cc}
 \min &amp; c x \\
@@ -238,7 +246,7 @@ s.t. &amp; A_kx \leq b_k + M_k(1-y_k) \\
      &amp; y\in \{0,1\}^{|S|}
 \end{array}
 \]</span></p>
-<p>where <span class="math inline">\(M_k\in\mathbb{R}^m\)</span> is a suitable choosen big-M vector.</p>
+<p>Here <span class="math inline">\(M_k\in\mathbb{R}^m\)</span> is a suitable choosen big-M vector.</p>
 </section>
 <section id="pyomo-examples-with-single-change-constraints" class="level2">
 <h2 class="anchored" data-anchor-id="pyomo-examples-with-single-change-constraints">Pyomo examples with single change constraints</h2>

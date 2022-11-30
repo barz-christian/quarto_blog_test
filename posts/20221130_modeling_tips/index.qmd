@@ -1,0 +1,167 @@
+---
+title: Linear programming tricks
+author: "cbarz"
+date: "2022-11-30"
+categories: [modeling]
+number-sections: true
+format:
+  html:
+    code-fold: true
+    code-copy: true
+link-citations: true
+description: Tricks to transform a optimization model into a linear program
+---
+
+# Linear programming tricks
+
+In this post we will see several tricks to transform certain models, for example models with nonlinear, features, into a conventional linear programming model. 
+Because linear programming model provide the fastest and most powerful solution methods, it is often advisable to use this format instead of solving a nonlinear or integer programming model^[Tricks for integer programming models will be part of another blog post.] where possible.
+
+As in this blog I mainly focus on a quick problem and solution description, mathematical details are skipped.
+As I devoted a detailed post for probabilistic or chance constraints, chance constraints are not discussed here.
+
+For a more detailed presentation we refer to  [@bisschop2006aimms, chapter 6.7].
+
+
+## Absolute values
+
+Consider the following model:
+$$
+\begin{array}{ll}
+\min & \sum_i c_i |x_i| \\
+s.t. & \sum_j a_{ij}x_j \leq b_i ,\; \forall i
+\end{array}
+$$
+
+Due to the presence of absolute values in the objective function we can not directly apply a linear programminng solver, but we can reformulate the problem as follows:
+$$
+\begin{array}{cl}
+x_i = & x_i^+ - x_i^- \\
+|x_i|=& x_i^+ + x_i^-\\
+      & x_i^+, x_i^- \geq 0
+\end{array}
+$$
+
+The above linear program can be rewritten as follows:
+
+$$
+\begin{array}{ll}
+\min & \sum_j c_j (x_j^+-x_j^-) \\
+s.t. & \sum_j a_{ij}(x_j^+-x_j^-) \geq b_i ,\; \forall i \\
+     & x_j^+, x_j^- \geq 0
+\end{array}
+$$
+
+Application: curve fitting, e.g. fitting a straight line through by least maximum deviation estimation.
+
+## A minimax objective
+
+Consider the following model:
+
+$$
+\begin{array}{ll}
+\min & \max_k \sum_j c_{kj}x_j \\
+s.t. & \sum_j a_{ij}x_j \leq b_i ,\; \forall i\\
+     & x_j \geq 0
+\end{array}
+$$
+
+In this objective we want to minimize a maximum. This is called a minimax objective.
+
+We represent the maximum by introducing an additional decision variable $z$, which will represent the maximal costs,
+$$
+z = \max \sum_j c_{kj}x_j
+$$
+
+and impose an extra constraint to establish the relationship:
+
+$$
+z \geq \sum_j c_{kj}x_j, \; \forall k
+$$
+
+The equivalent linear programm is:
+
+$$
+\begin{array}{ll}
+\min & z \\
+s.t. & \sum_j a_{ij}x_j \leq b_i ,\; \forall i\\
+     & \sum_j c_{kj}x_j \leq z, \; \forall k \\
+     & x_j \geq 0     
+\end{array}
+$$
+
+The problem ob maximizing a minimum can be reformulated in a similar fashion.
+
+Application: curve fitting, e.g. fitting a straight line through by least maximum deviation estimation.
+
+## A fractional objective
+
+Consider the following model:
+
+$$
+\begin{array}{ll}
+\min & \frac{\sum_j c_j x_j +\alpha}{\sum_j d_j x_j + \beta} \\
+s.t. & \sum_j a_{ij}x_j \leq b_i ,\; \forall i\\
+     & x_j \geq 0
+\end{array}
+$$
+
+Here the objective is given as a ratio of two linear terms. It is assumed that the denominator is either positive or negative over the entire feasible set of $x_j$.
+
+The main trick is to introduce variables $y_j$ and $t$ such that $y_j=tx_j$. 
+
+In the following explanation, we assume the value of the denominator to be positive. If it is negative, the directions in the inequalities must be reversed.
+We introduce a new variable for the denominator
+$$
+t:=\frac{1}{\sum_j d_j x_j + \beta}
+$$
+and add an extra constraint $t\geq 0$. This yields the following model
+
+$$
+\begin{array}{ll}
+\min & \sum_j c_j x_j +\alpha t\\
+s.t. & \sum_j a_{ij}x_j \leq b_i t,\; \forall i\\
+     & \sum_j d_jy_j+\beta t = 1 \\
+     & t \geq 0 \\
+     & y_j \geq 0
+\end{array}
+$$
+
+## A range constraint
+
+Consider the following model:
+
+$$
+\begin{array}{ll}
+\min & \sum_j c_j x_j \\
+s.t. & d_i \leq \sum_j a_{ij}x_j \leq e_i ,\; \forall i\\
+     & x_j \geq 0
+\end{array}
+$$
+
+Application: blending problems, e.g. the minimal amout of a nutirent required in a blend and,at the same time, three is a limited amount available.
+The obvious way is to replace the range constraint by 2 constraints, but when a change occurs both constraints have to be maintained.
+
+We introduce new variables $u_i$ 
+$$
+u_i + \sum_j a_{ij}x_j =e_i ,\; \forall i
+$$
+and impose the constraints
+$$
+0 \leq u_i \leq e_i -d_i , \; \forall i
+$$
+
+The equivalent linear programm is:
+
+$$
+\begin{array}{ll}
+\min & \sum_j c_j x_j \\
+s.t. & u_i + \sum_j a_{ij}x_j =e_i ,\; \forall i \\
+     & 0 \leq u_i \leq e_i -d_i , \; \forall i \\
+     & x_j \geq 0
+\end{array}
+$$
+
+# Summary
+
+In this post we saw a number of tricks to transform special models into a linear program and mentioned typical applications. We saw how to handle absolute values, minimax objectives, fractional objectives and range contraints.

@@ -2,11 +2,12 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/20221130_modeling_tips/index.html",
       "/posts/20221129_citation/index.html",
+      "/posts/20221128_nbdev_comands/index.html",
       "/posts/jupyter/index.html",
       "/posts/welcome/index.html",
       "/posts/20220928_github_actions/index.html",
-      "/posts/20221128_nbdev_comands/index.html",
       "/posts/20220927_ChanceConstraintsIntro/index.html",
       "/posts/20221004_buildingblog/index.html"
     ]

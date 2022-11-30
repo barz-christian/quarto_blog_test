@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "SP_blog"
+  site-url: "https://barz-christian.github.io/quarto_blog_test"
+  description: "SP_blog"
+  repo-branch: master
+  repo-url: "https://github.com/barz-christian/quarto_blog_test"

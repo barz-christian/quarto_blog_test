@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "quarto_blog_test"
+version = "0.1.0"
+description = ""
+authors = ["christian barz <barz_christian@web.de>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pandas = "^1.5.2"
+Pyomo = "^6.4.2"
+jupyterlab = "^3.5.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

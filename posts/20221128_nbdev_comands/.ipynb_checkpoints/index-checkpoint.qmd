@@ -1,9 +1,9 @@
 ---
 title: useful nbdev comands
 author: cbarz
-date: 28.11.2022
+date: "2022-11-28"
 description: list of nbdev commands
-tags: [nbdev]
+categories: [nbdev]
 ---
 
 ## introduction

@@ -5,5 +5,4 @@ d = { 'settings': { 'branch': 'master',
                 'doc_host': 'https://barz-christian.github.io',
                 'git_url': 'https://github.com/barz-christian/quarto_blog_test',
                 'lib_path': 'SP_blog'},
-  'syms': { 'SP_blog.core': {'SP_blog.core.foo': ('core.html#foo', 'SP_blog/core.py')},
-            'SP_blog.nbdev_test': {'SP_blog.nbdev_test.dat': ('dev.html#dat', 'SP_blog/nbdev_test.py')}}}
+  'syms': {'SP_blog.core': {'SP_blog.core.foo': ('core.html#foo', 'SP_blog/core.py')}}}

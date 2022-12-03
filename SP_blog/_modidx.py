@@ -6,4 +6,4 @@ d = { 'settings': { 'branch': 'master',
                 'git_url': 'https://github.com/barz-christian/quarto_blog_test',
                 'lib_path': 'SP_blog'},
   'syms': { 'SP_blog.core': {'SP_blog.core.foo': ('core.html#foo', 'SP_blog/core.py')},
-            'SP_blog.nbdev_test': {'SP_blog.nbdev_test.dat': ('dev.html#dat', 'SP_blog/nbdev_test.py')}}}
+            'SP_blog.test': {'SP_blog.test.dat': ('dev.html#dat', 'SP_blog/test.py')}}}

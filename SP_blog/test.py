@@ -6,4 +6,5 @@ __all__ = ['dat']
 # %% ../nbs/010_dev.ipynb 3
 def dat():
     out = {1: "hi"}
+    print('hey')
     return out

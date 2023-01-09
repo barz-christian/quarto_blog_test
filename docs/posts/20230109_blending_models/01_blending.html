@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="cbarz">
+<meta name="dcterms.date" content="2023-01-09">
+<meta name="description" content="example of blending model.">
+
+<title>SP_blog - blending 1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">SP_blog</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">blending 1</h1>
+                  <div>
+        <div class="description">
+          example of blending model.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">pyomo</div>
+                <div class="quarto-category">modeling</div>
+                <div class="quarto-category">blending</div>
+                <div class="quarto-category">product mix</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>cbarz </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 9, 2023</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#blending-models---example-steel-production" id="toc-blending-models---example-steel-production" class="nav-link active" data-scroll-target="#blending-models---example-steel-production">Blending models - example: Steel production</a></li>
+  <li><a href="#example-data" id="toc-example-data" class="nav-link" data-scroll-target="#example-data">Example data</a></li>
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model">Model</a>
+  <ul class="collapse">
+  <li><a href="#sets" id="toc-sets" class="nav-link" data-scroll-target="#sets">sets</a></li>
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">variables</a></li>
+  <li><a href="#parameter" id="toc-parameter" class="nav-link" data-scroll-target="#parameter">parameter</a></li>
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">objective</a></li>
+  <li><a href="#constraints" id="toc-constraints" class="nav-link" data-scroll-target="#constraints">constraints</a></li>
+  <li><a href="#deterministic-model" id="toc-deterministic-model" class="nav-link" data-scroll-target="#deterministic-model">deterministic model</a></li>
+  </ul></li>
+  <li><a href="#helper-functions" id="toc-helper-functions" class="nav-link" data-scroll-target="#helper-functions">helper functions</a></li>
+  <li><a href="#inspect-soulution" id="toc-inspect-soulution" class="nav-link" data-scroll-target="#inspect-soulution">inspect soulution</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="blending-models---example-steel-production" class="level1">
+<h1>Blending models - example: Steel production</h1>
+<p>We want to produce a predefined quantity of a product, e.g.&nbsp;steel. The produced product must have certain characteristics (grades) - see section below. In stock we have different possible ingredients, e.g.&nbsp;ores, and these ingredients contribute differently to the requirements and have different availablility and prices - see section below.</p>
+<p>We want to determine the recipie which minimizes the production costs.</p>
+<p>source: <span class="citation" data-cites="gueret1999applications">Guéret, Prins, and Sevaux (<a href="#ref-gueret1999applications" role="doc-biblioref">1999</a>)</span> p.62</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyomo.environ <span class="im">as</span> pyo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="example-data" class="level1">
+<h1>Example data</h1>
+<p>For our example we consider the following characteristics of the final product and the following raw materials with the the following properties:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>requirements <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">'element'</span> : [<span class="st">'C'</span>,<span class="st">'Cu'</span>,<span class="st">'Mn'</span>],</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'min_grade'</span>: [<span class="fl">2.</span>,<span class="fl">0.4</span>,<span class="fl">1.2</span>],</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_grade'</span>: [<span class="dv">3</span>,<span class="fl">0.6</span>, <span class="fl">1.65</span>]}</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>raw_mat <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'raw_mat'</span>: [<span class="st">'Fe1'</span>,<span class="st">'Fe2'</span>,<span class="st">'Fe3'</span>,<span class="st">'Cu1'</span>,<span class="st">'Cu2'</span>,<span class="st">'Al1'</span>,<span class="st">'Al2'</span>],</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'C'</span>: [<span class="fl">2.5</span>,<span class="fl">3.</span>,<span class="fl">0.</span>,<span class="fl">0.</span>,<span class="fl">0.</span>,<span class="fl">0.</span>,<span class="dv">0</span>],</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Cu'</span>:[<span class="fl">0.</span>,<span class="fl">0.</span>,<span class="fl">0.3</span>,<span class="fl">90.</span>,<span class="fl">96.</span>,<span class="fl">0.4</span>,<span class="fl">0.6</span>],</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Mn'</span>:[<span class="fl">1.3</span>,<span class="fl">0.8</span>,<span class="fl">0.</span>,<span class="fl">0.</span>,<span class="fl">4.</span>,<span class="fl">1.2</span>,<span class="fl">0.</span>],</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'availability'</span>:[<span class="fl">400.</span>,<span class="fl">300.</span>,<span class="fl">600.</span>,<span class="fl">500.</span>,<span class="fl">200.</span>,<span class="fl">300.</span>,<span class="fl">250.</span>],</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'costs'</span>:[<span class="fl">200.</span>,<span class="fl">250.</span>,<span class="fl">150.</span>,<span class="fl">220.</span>,<span class="fl">240.</span>,<span class="fl">200.</span>,<span class="fl">165.</span>],</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>demand <span class="op">=</span> <span class="fl">500.</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'requirements'</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>display(requirements)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'raw materials'</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>display(raw_mat)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Demand of the final product: '</span> <span class="op">+</span> <span class="bu">str</span>(demand))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>requirements</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>element</th>
+      <th>min_grade</th>
+      <th>max_grade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>C</td>
+      <td>2.0</td>
+      <td>3.00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Cu</td>
+      <td>0.4</td>
+      <td>0.60</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Mn</td>
+      <td>1.2</td>
+      <td>1.65</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>raw materials</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>raw_mat</th>
+      <th>C</th>
+      <th>Cu</th>
+      <th>Mn</th>
+      <th>availability</th>
+      <th>costs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Fe1</td>
+      <td>2.5</td>
+      <td>0.0</td>
+      <td>1.3</td>
+      <td>400.0</td>
+      <td>200.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Fe2</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>0.8</td>
+      <td>300.0</td>
+      <td>250.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Fe3</td>
+      <td>0.0</td>
+      <td>0.3</td>
+      <td>0.0</td>
+      <td>600.0</td>
+      <td>150.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Cu1</td>
+      <td>0.0</td>
+      <td>90.0</td>
+      <td>0.0</td>
+      <td>500.0</td>
+      <td>220.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Cu2</td>
+      <td>0.0</td>
+      <td>96.0</td>
+      <td>4.0</td>
+      <td>200.0</td>
+      <td>240.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Al1</td>
+      <td>0.0</td>
+      <td>0.4</td>
+      <td>1.2</td>
+      <td>300.0</td>
+      <td>200.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Al2</td>
+      <td>0.0</td>
+      <td>0.6</td>
+      <td>0.0</td>
+      <td>250.0</td>
+      <td>165.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Demand of the final product: 500.0</code></pre>
+</div>
+</div>
+</section>
+<section id="model" class="level1">
+<h1>Model</h1>
+<p>Before we give an algebraic representation of the model, we introduce the relevant problem notions:</p>
+<section id="sets" class="level2">
+<h2 class="anchored" data-anchor-id="sets">sets</h2>
+<ul>
+<li><span class="math inline">\(raw\)</span> - set of raw materials</li>
+<li><span class="math inline">\(comp\)</span> - set of grade requirements</li>
+</ul>
+</section>
+<section id="variables" class="level2">
+<h2 class="anchored" data-anchor-id="variables">variables</h2>
+<ul>
+<li><span class="math inline">\(use_r\)</span> - used quantity in optimal recipie of raw material <span class="math inline">\(r\)</span></li>
+</ul>
+</section>
+<section id="parameter" class="level2">
+<h2 class="anchored" data-anchor-id="parameter">parameter</h2>
+<ul>
+<li><span class="math inline">\(demand\)</span> - demand of the product</li>
+<li><span class="math inline">\(produce\)</span> - produced quatity of the product</li>
+<li><span class="math inline">\(cost_r\)</span> - costs of raw material <span class="math inline">\(r\)</span></li>
+<li><span class="math inline">\(P_{rc}\)</span> - percentage of component <span class="math inline">\(c\)</span> in raw material <span class="math inline">\(r\)</span></li>
+<li><span class="math inline">\(Pmin_c\)</span> - minimal requirement of component <span class="math inline">\(c\)</span> in product</li>
+<li><span class="math inline">\(Pmax_c\)</span> - maximal requirement of component <span class="math inline">\(c\)</span> in product</li>
+</ul>
+</section>
+<section id="objective" class="level2">
+<h2 class="anchored" data-anchor-id="objective">objective</h2>
+<ul>
+<li>find the recipe with minimal costs fulfilling the requirements</li>
+</ul>
+</section>
+<section id="constraints" class="level2">
+<h2 class="anchored" data-anchor-id="constraints">constraints</h2>
+<ul>
+<li>(c1) produced quatity is given by the sum of the used rat materials (in tons)</li>
+<li>(c2) lower limit on the components in the final product</li>
+<li>(c3) upper limit on the components in the final product</li>
+<li>(c4) use only available quatities of the raw materials</li>
+<li>(c5) produced quatity fulfills demands</li>
+</ul>
+</section>
+<section id="deterministic-model" class="level2">
+<h2 class="anchored" data-anchor-id="deterministic-model">deterministic model</h2>
+<p><span class="math display">\[
+\begin{array}{llll}
+\min &amp; \sum_{r\in raw} cost_r \cdot use_r &amp; &amp; \\
+s.t. &amp; produce = \sum_{r\in raw} use_r &amp; &amp; (c1)\\
+     &amp; \sum_{r\in raw} P_{rc}\cdot use_r \geq Pmin_c \cdot produce &amp; , \forall c\in comp &amp; (c2)\\
+     &amp; \sum_{r\in raw} P_{rc}\cdot use_r \leq Pmax_c \cdot produce &amp;  , \forall c\in comp &amp; (c3)\\
+     &amp; use_r \leq avail_r &amp;  , \forall r\in raw &amp; (c4) \\
+     &amp; produce \geq demand &amp; &amp; (c5) \\
+     &amp; use_r,produce \geq 0 &amp; &amp; (c6)
+\end{array}
+\]</span></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> alloy_blending(requirements,raw_mat, demand):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> pyo.ConcreteModel(<span class="st">'alloy production'</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sets</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    m.raw <span class="op">=</span> pyo.Set(initialize <span class="op">=</span> raw_mat.raw_mat)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    m.comp <span class="op">=</span> pyo.Set(initialize <span class="op">=</span> requirements.element)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># parameter</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">@m.Param</span>(m.raw, doc <span class="op">=</span> <span class="st">'costs of raw mat r'</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> costs(m,r):</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> raw_mat.loc[raw_mat[<span class="st">'raw_mat'</span>] <span class="op">==</span> r, <span class="st">'costs'</span>].values[<span class="dv">0</span>]</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">@m.Param</span>(m.raw, m.comp, doc <span class="op">=</span> <span class="st">'percentage of component c in raw material r'</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> P(m,r,c):</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> raw_mat.loc[raw_mat[<span class="st">'raw_mat'</span>] <span class="op">==</span> r, c].values[<span class="dv">0</span>]</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">@m.Param</span>(m.comp, doc<span class="op">=</span> <span class="st">'minimal percentage of component c in final product'</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> Pmin(m,c):</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> requirements.loc[requirements[<span class="st">'element'</span>] <span class="op">==</span> c, <span class="st">'min_grade'</span>].values[<span class="dv">0</span>]</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">@m.Param</span>(m.comp, doc<span class="op">=</span> <span class="st">'maximal percentage of component c in final product'</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> Pmax(m,c):</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> requirements.loc[requirements[<span class="st">'element'</span>] <span class="op">==</span> c, <span class="st">'max_grade'</span>].values[<span class="dv">0</span>]</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">@m.Param</span>(m.raw, doc <span class="op">=</span> <span class="st">'availability of raw materials'</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> avail(m,r):</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> raw_mat.loc[raw_mat[<span class="st">'raw_mat'</span>] <span class="op">==</span> r, <span class="st">'availability'</span>].values[<span class="dv">0</span>]</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">@m.Param</span>(doc <span class="op">=</span> <span class="st">'product demand'</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> demand(m):</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> demand</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># variables</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    m.use <span class="op">=</span> pyo.Var(m.raw, domain <span class="op">=</span> pyo.NonNegativeReals, doc <span class="op">=</span> <span class="st">'used tons of raw material r'</span>)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    m.produced <span class="op">=</span> pyo.Var(domain <span class="op">=</span> pyo.NonNegativeReals, doc <span class="op">=</span> <span class="st">'tons produced'</span>)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># objective</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> objective(m):</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pyo.summation(m.costs, m.use)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    m.OBJ <span class="op">=</span> pyo.Objective(rule <span class="op">=</span> objective(m), sense <span class="op">=</span> pyo.minimize)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># constraints</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">@m.Constraint</span>(doc <span class="op">=</span><span class="st">'tons produced'</span>)</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> c1(m):</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> m.produced <span class="op">==</span> pyo.summation(m.use)</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">@m.Constraint</span>(m.comp, doc <span class="op">=</span> <span class="st">'lower limit of grade in final product'</span>)</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> c2(m, c):</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">sum</span>(m.P[r,c] <span class="op">*</span> m.use[r] <span class="cf">for</span> r <span class="kw">in</span> m.raw) <span class="op">&gt;=</span> m.Pmin[c] <span class="op">*</span> m.produced</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">@m.Constraint</span>(m.comp, doc <span class="op">=</span> <span class="st">'upper limit of grade in final product'</span>)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> c3(m, c):</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">sum</span>(m.P[r,c] <span class="op">*</span> m.use[r] <span class="cf">for</span> r <span class="kw">in</span> m.raw) <span class="op">&lt;=</span> m.Pmax[c] <span class="op">*</span> m.produced</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">@m.Constraint</span>(m.raw, doc <span class="op">=</span> <span class="st">'use component c maximal w.r.t. availability of c'</span>)</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> c4(m, r):</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> m.use[r] <span class="op">&lt;=</span> m.avail[r]</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">@m.Constraint</span>(doc <span class="op">=</span> <span class="st">'produce at least the demand'</span>)</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> c5(m):</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> m.produced <span class="op">&gt;=</span> m.demand</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>    <span class="co"># solver</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>    solver <span class="op">=</span> pyo.SolverFactory(<span class="st">'glpk'</span>)</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>    solver.solve(m)</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="helper-functions" class="level1">
+<h1>helper functions</h1>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> extract_solution(m):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    solution <span class="op">=</span> {r: [pyo.value(m.use[r])] <span class="cf">for</span> r <span class="kw">in</span> m.raw}</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> pd.DataFrame(data <span class="op">=</span> solution)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    output.index <span class="op">=</span> [<span class="st">'used'</span>]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> output</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visualize_solution(solution):    </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> solution.T</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    output[<span class="st">'raw_mat'</span>] <span class="op">=</span> output.index</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> pd.merge(output, raw_mat)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> requirements.element:</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        output[i] <span class="op">=</span> output[i] <span class="op">*</span> output[<span class="st">'used'</span>] <span class="op">/</span> <span class="bu">sum</span>(output[<span class="st">'used'</span>])</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    costs <span class="op">=</span> <span class="bu">round</span>(<span class="bu">sum</span>(output[<span class="st">'used'</span>] <span class="op">*</span> output[<span class="st">'costs'</span>]),<span class="dv">2</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'production costs: '</span> <span class="op">+</span> <span class="bu">str</span>(costs))</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    produced <span class="op">=</span> <span class="bu">round</span>(<span class="bu">sum</span>(output[<span class="st">'used'</span>]),<span class="dv">2</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'tons produced: '</span> <span class="op">+</span> <span class="bu">str</span>(produced))</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    remove_col <span class="op">=</span> <span class="bu">set</span>(output.columns) <span class="op">-</span> {<span class="st">'C'</span>, <span class="st">'Cu'</span>, <span class="st">'Mn'</span>}</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> pd.DataFrame(output.drop(columns <span class="op">=</span> remove_col).<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">0</span>))</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    output.rename(columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">'grade in final product'</span>} , inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="inspect-soulution" class="level1">
+<h1>inspect soulution</h1>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> alloy_blending(requirements,raw_mat, demand)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> extract_solution(m)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>display(sol)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>visualize_solution(sol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Fe1</th>
+      <th>Fe2</th>
+      <th>Fe3</th>
+      <th>Cu1</th>
+      <th>Cu2</th>
+      <th>Al1</th>
+      <th>Al2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>used</th>
+      <td>400.0</td>
+      <td>0.0</td>
+      <td>39.776302</td>
+      <td>0.0</td>
+      <td>2.761272</td>
+      <td>57.462426</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>production costs: 98121.64
+tons produced: 500.0</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>grade in final product</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>C</th>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>Cu</th>
+      <td>0.6</td>
+    </tr>
+    <tr>
+      <th>Mn</th>
+      <td>1.2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-gueret1999applications" class="csl-entry" role="doc-biblioentry">
+Guéret, Christelle, Christian Prins, and Marc Sevaux. 1999. <span>“Applications of Optimization with Xpress-MP.”</span> <em>Contract</em>, 00034.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

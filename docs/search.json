@@ -42,6 +42,55 @@
     "text": "5.2 Add a citation in a blog document\n\nMarkdown format for citation is [@citation]\nGiven example: [@trotta2022pickup] renders to (Trotta et al. 2022)\nThere are other markdown format for citation, e.g. @trotta2022pickup renders to Trotta et al. (2022). For more information just have a look at the sources below."
   },
   {
+    "objectID": "posts/20230109_blending_models/01_blending.html",
+    "href": "posts/20230109_blending_models/01_blending.html",
+    "title": "blending 1",
+    "section": "",
+    "text": "We want to produce a predefined quantity of a product, e.g. steel. The produced product must have certain characteristics (grades) - see section below. In stock we have different possible ingredients, e.g. ores, and these ingredients contribute differently to the requirements and have different availablility and prices - see section below.\nWe want to determine the recipie which minimizes the production costs.\nsource: Guéret, Prins, and Sevaux (1999) p.62\n\n\nCode\nimport pandas as pd\nimport pyomo.environ as pyo"
+  },
+  {
+    "objectID": "posts/20230109_blending_models/01_blending.html#sets",
+    "href": "posts/20230109_blending_models/01_blending.html#sets",
+    "title": "blending 1",
+    "section": "sets",
+    "text": "sets\n\n\\(raw\\) - set of raw materials\n\\(comp\\) - set of grade requirements"
+  },
+  {
+    "objectID": "posts/20230109_blending_models/01_blending.html#variables",
+    "href": "posts/20230109_blending_models/01_blending.html#variables",
+    "title": "blending 1",
+    "section": "variables",
+    "text": "variables\n\n\\(use_r\\) - used quantity in optimal recipie of raw material \\(r\\)"
+  },
+  {
+    "objectID": "posts/20230109_blending_models/01_blending.html#parameter",
+    "href": "posts/20230109_blending_models/01_blending.html#parameter",
+    "title": "blending 1",
+    "section": "parameter",
+    "text": "parameter\n\n\\(demand\\) - demand of the product\n\\(produce\\) - produced quatity of the product\n\\(cost_r\\) - costs of raw material \\(r\\)\n\\(P_{rc}\\) - percentage of component \\(c\\) in raw material \\(r\\)\n\\(Pmin_c\\) - minimal requirement of component \\(c\\) in product\n\\(Pmax_c\\) - maximal requirement of component \\(c\\) in product"
+  },
+  {
+    "objectID": "posts/20230109_blending_models/01_blending.html#objective",
+    "href": "posts/20230109_blending_models/01_blending.html#objective",
+    "title": "blending 1",
+    "section": "objective",
+    "text": "objective\n\nfind the recipe with minimal costs fulfilling the requirements"
+  },
+  {
+    "objectID": "posts/20230109_blending_models/01_blending.html#constraints",
+    "href": "posts/20230109_blending_models/01_blending.html#constraints",
+    "title": "blending 1",
+    "section": "constraints",
+    "text": "constraints\n\n(c1) produced quatity is given by the sum of the used rat materials (in tons)\n(c2) lower limit on the components in the final product\n(c3) upper limit on the components in the final product\n(c4) use only available quatities of the raw materials\n(c5) produced quatity fulfills demands"
+  },
+  {
+    "objectID": "posts/20230109_blending_models/01_blending.html#deterministic-model",
+    "href": "posts/20230109_blending_models/01_blending.html#deterministic-model",
+    "title": "blending 1",
+    "section": "deterministic model",
+    "text": "deterministic model\n\\[\n\\begin{array}{llll}\n\\min & \\sum_{r\\in raw} cost_r \\cdot use_r & & \\\\\ns.t. & produce = \\sum_{r\\in raw} use_r & & (c1)\\\\\n     & \\sum_{r\\in raw} P_{rc}\\cdot use_r \\geq Pmin_c \\cdot produce & , \\forall c\\in comp & (c2)\\\\\n     & \\sum_{r\\in raw} P_{rc}\\cdot use_r \\leq Pmax_c \\cdot produce &  , \\forall c\\in comp & (c3)\\\\\n     & use_r \\leq avail_r &  , \\forall r\\in raw & (c4) \\\\\n     & produce \\geq demand & & (c5) \\\\\n     & use_r,produce \\geq 0 & & (c6)\n\\end{array}\n\\]\n\n\nCode\ndef alloy_blending(requirements,raw_mat, demand):\n    m = pyo.ConcreteModel('alloy production')\n    \n    # sets\n    m.raw = pyo.Set(initialize = raw_mat.raw_mat)\n    m.comp = pyo.Set(initialize = requirements.element)\n    \n    # parameter\n    @m.Param(m.raw, doc = 'costs of raw mat r')\n    def costs(m,r):\n        return raw_mat.loc[raw_mat['raw_mat'] == r, 'costs'].values[0]\n    @m.Param(m.raw, m.comp, doc = 'percentage of component c in raw material r')\n    def P(m,r,c):\n        return raw_mat.loc[raw_mat['raw_mat'] == r, c].values[0]\n    @m.Param(m.comp, doc= 'minimal percentage of component c in final product')\n    def Pmin(m,c):\n        return requirements.loc[requirements['element'] == c, 'min_grade'].values[0]\n    @m.Param(m.comp, doc= 'maximal percentage of component c in final product')\n    def Pmax(m,c):\n        return requirements.loc[requirements['element'] == c, 'max_grade'].values[0]\n    @m.Param(m.raw, doc = 'availability of raw materials')\n    def avail(m,r):\n        return raw_mat.loc[raw_mat['raw_mat'] == r, 'availability'].values[0]\n    @m.Param(doc = 'product demand')\n    def demand(m):\n        return demand\n    \n    # variables\n    m.use = pyo.Var(m.raw, domain = pyo.NonNegativeReals, doc = 'used tons of raw material r')\n    m.produced = pyo.Var(domain = pyo.NonNegativeReals, doc = 'tons produced')\n    \n    # objective\n    def objective(m):\n        return pyo.summation(m.costs, m.use)\n    m.OBJ = pyo.Objective(rule = objective(m), sense = pyo.minimize)\n    \n    # constraints\n    @m.Constraint(doc ='tons produced')\n    def c1(m):\n        return m.produced == pyo.summation(m.use)\n    \n    @m.Constraint(m.comp, doc = 'lower limit of grade in final product')\n    def c2(m, c):\n        return sum(m.P[r,c] * m.use[r] for r in m.raw) >= m.Pmin[c] * m.produced\n    @m.Constraint(m.comp, doc = 'upper limit of grade in final product')\n    def c3(m, c):\n        return sum(m.P[r,c] * m.use[r] for r in m.raw) <= m.Pmax[c] * m.produced\n    @m.Constraint(m.raw, doc = 'use component c maximal w.r.t. availability of c')\n    def c4(m, r):\n        return m.use[r] <= m.avail[r]\n    @m.Constraint(doc = 'produce at least the demand')\n    def c5(m):\n        return m.produced >= m.demand\n\n    \n    # solver\n    solver = pyo.SolverFactory('glpk')\n    solver.solve(m)\n    \n    return m"
+  },
+  {
     "objectID": "posts/20220928_github_actions/index.html",
     "href": "posts/20220928_github_actions/index.html",
     "title": "github actions",
@@ -109,7 +158,7 @@
     "href": "index.html",
     "title": "SP_blog",
     "section": "",
-    "text": "modeling\n\n\n\n\nTricks to transform a optimization model into a linear program\n\n\n\n\n\n\nNov 30, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto\n\n\n\n\nQuick introduction to use citation and footnotes in quarto\n\n\n\n\n\n\nNov 29, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnbdev\n\n\n\n\nlist of nbdev commands\n\n\n\n\n\n\nNov 28, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntest\n\n\n\n\na test to blog a jupyter notebook with a pyomo model\n\n\n\n\n\n\nNov 27, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 24, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ngithub\n\n\n\n\nuse github actions\n\n\n\n\n\n\nSep 28, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\npyomo\n\n\nmodeling\n\n\n\n\nIn a stochastic program we can put uncertainty on the constraints. We give a short introduction about the different types of chance constraints and implement some examples in pyomo.\n\n\n\n\n\n\nSep 27, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnbdev\n\n\nquarto\n\n\n\n\nbuild a blog with quarto and nbdev\n\n\n\n\n\n\nApr 10, 2022\n\n\ncbarz\n\n\n\n\n\n\nNo matching items"
+    "text": "pyomo\n\n\nmodeling\n\n\nblending\n\n\nproduct mix\n\n\n\n\nexample of blending model.\n\n\n\n\n\n\nJan 9, 2023\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmodeling\n\n\n\n\nTricks to transform a optimization model into a linear program\n\n\n\n\n\n\nNov 30, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto\n\n\n\n\nQuick introduction to use citation and footnotes in quarto\n\n\n\n\n\n\nNov 29, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnbdev\n\n\n\n\nlist of nbdev commands\n\n\n\n\n\n\nNov 28, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntest\n\n\n\n\na test to blog a jupyter notebook with a pyomo model\n\n\n\n\n\n\nNov 27, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 24, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ngithub\n\n\n\n\nuse github actions\n\n\n\n\n\n\nSep 28, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\npyomo\n\n\nmodeling\n\n\n\n\nIn a stochastic program we can put uncertainty on the constraints. We give a short introduction about the different types of chance constraints and implement some examples in pyomo.\n\n\n\n\n\n\nSep 27, 2022\n\n\ncbarz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnbdev\n\n\nquarto\n\n\n\n\nbuild a blog with quarto and nbdev\n\n\n\n\n\n\nApr 10, 2022\n\n\ncbarz\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
